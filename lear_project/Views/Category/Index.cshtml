@@ -1,0 +1,14 @@
+﻿@using lear_project.Models;
+@model IEnumerable<Category>
+
+ 
+<form method="get" asp-controller="Food" asp-action="SelectedCategory">
+    <select name="selectedCategory">
+        <option value="">Válasszon egy kategóriát...</option>
+        @foreach (var category in Model)
+        {
+            <option value="@category.Name">@category.Name</option>
+        }
+    </select>
+    <button type="submit">Kiválasztás</button>
+</form>

@@ -1,7 +1,17 @@
+using lear_project.Data;
+using lear_project.Logic;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<ICategoryLogic, CategoryLogic>();
+builder.Services.AddTransient<IFoodLogic, FoodLogic>();
+builder.Services.AddTransient<ICartLogic, CartLogic>();
+//builder.Services.AddOutputCaching();
+builder.Services.AddDbContext<FoodDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -19,9 +29,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapControllers();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Category}/{action=Index}/{id?}");
+
+AppDbInitializer.Seed(app);
 
 app.Run();

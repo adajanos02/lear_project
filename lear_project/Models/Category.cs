@@ -2,13 +2,15 @@
 {
     public class Category
     {
-        public int Id { get; set; }
+        private static int nextId = 0;
+
+        public string Id { get; private set; }
         public string Name { get; set; }
 
-        public Category(int id, string name)
+        public Category()
         {
-            this.Id = id;
-            this.Name = name;
+            this.Id = Guid.NewGuid().ToString();
+            
         }
     }
 }

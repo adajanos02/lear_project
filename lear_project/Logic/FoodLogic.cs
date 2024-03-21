@@ -37,6 +37,20 @@ namespace lear_project.Logic
         {
             return _context.FoodList.ToList();
         }
+        public IEnumerable<Food> Read()
+        {
+            return _context.FoodList;
+        }
+
+        public Food? Read(string name)
+        {
+            return _context.FoodList.FirstOrDefault(t => t.Name == name);
+        }
+
+        public Food? ReadFromId(string id)
+        {
+            return _context.FoodList.FirstOrDefault(t => t.Id == id);
+        }
 
         public void UpdateFood(string foodId)
         {

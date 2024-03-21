@@ -9,6 +9,8 @@ namespace lear_project.Logic
         void AddFood(Food food);
         void DeleteFood(string foodId);
         void UpdateFood(string foodId);
+        Food? ReadFromId(string id);
+        Food? Read(string name);
 
     }
 }

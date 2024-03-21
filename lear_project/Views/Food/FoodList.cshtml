@@ -1,0 +1,30 @@
+﻿<!-- Food/FoodList.cshtml -->
+@model IEnumerable<Food>
+
+<h1>Food List</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Action</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var foodItem in Model)
+        {
+            <tr>
+                <td>@foodItem.Name</td>
+                <td>@foodItem.Description</td>
+                <td>
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="foodId" value="@foodItem.Id" /> 
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
