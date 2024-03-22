@@ -7,14 +7,16 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Quantity</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.GroupBy(x => x.Id))
         {
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
+                <td>@item.First().Name</td>
+                <td>@item.First().Description</td>
+                <td>@Model.Count(x => x.Id == item.First().Id)</td>
             </tr>
         }
     </tbody>

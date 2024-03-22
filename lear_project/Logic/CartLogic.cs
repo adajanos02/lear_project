@@ -5,21 +5,19 @@ namespace lear_project.Logic
 {
     public class CartLogic : ICartLogic
     {
-        private readonly FoodDbContext _context;
+        
+        private static List<Food> _CartList = new List<Food>();
 
-        public CartLogic(FoodDbContext context)
-        {
-            _context = context;
-        }
+       
 
         public void AddToCart(Food foodItem)
         {
-            _context.CartList.Add(foodItem);
+            _CartList.Add(foodItem);
         }
 
         public void RemoveFromCart(Food foodItem)
         {
-            _context.CartList.Remove(foodItem);
+            _CartList.Remove(foodItem);
         }
 
         //public void ClearCart()
@@ -29,7 +27,7 @@ namespace lear_project.Logic
 
         public IEnumerable<Food> GetCartItems()
         {
-            return _context.CartList.ToList();
+            return _CartList.ToList();
         }
 
        

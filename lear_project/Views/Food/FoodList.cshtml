@@ -18,8 +18,12 @@
                 <td>@foodItem.Name</td>
                 <td>@foodItem.Description</td>
                 <td>
+                    <input type="number" name="quantity_@foodItem.Id" min="1" value="1" onchange="updateQuantity(this)" />
+                </td>
+                <td>
                     <form asp-controller="Cart" asp-action="AddToCart" method="post">
-                        <input type="hidden" name="foodId" value="@foodItem.Id" /> 
+                        <input type="hidden" name="foodId" value="@foodItem.Id" />
+                        <input type="hidden" name="quantity" id="quantity_@foodItem.Id" value="1" />
                         <button type="submit">Add to Cart</button>
                     </form>
                 </td>
@@ -28,3 +32,11 @@
         }
     </tbody>
 </table>
+<script>
+    // JavaScript függvény az egyedi darabszám beállításához
+    function updateQuantity(input) {
+        var foodId = input.name.split('_')[1]; // Az étel azonosítójának meghatározása
+        var quantityInput = document.getElementById('quantity_' + foodId);
+        quantityInput.value = input.value;
+    }
+</script>
