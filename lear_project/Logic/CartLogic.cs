@@ -6,7 +6,7 @@ namespace lear_project.Logic
     public class CartLogic : ICartLogic
     {
         
-        private static List<Food> _CartList = new List<Food>();
+        public static List<Food> _CartList = new List<Food>();
 
        
 

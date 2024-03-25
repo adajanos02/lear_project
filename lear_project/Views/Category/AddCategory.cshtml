@@ -1,0 +1,13 @@
+﻿@using lear_project.Models
+@model Category
+
+<h1>Create your category</h1>
+
+<form asp-controller="Category" asp-action="AddCategory" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column">
+    @Html.LabelFor(t => t.Name)
+    @Html.EditorFor(t => t.Name)
+    @Html.ValidationMessageFor(t => t.Name)
+
+    <input type="submit" class="btn btn-primary" value="Create" />
+
+</form>

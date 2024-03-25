@@ -16,7 +16,7 @@ namespace lear_project.Logic
         public void AddFood(Food food)
         {
             var old = _context.FoodList.FirstOrDefault(t => t.Id == food.Id);
-            if (old == null) 
+            if (old == null)
             {
                 _context.FoodList.Add(food);
                 _context.SaveChanges();
@@ -26,7 +26,7 @@ namespace lear_project.Logic
         public void DeleteFood(string foodId)
         {
             var item = _context.FoodList.FirstOrDefault(t => t.Id == foodId);
-            if (item == null)
+            if (item != null)
             {
                 _context.FoodList.Remove(item);
                 _context.SaveChanges();
@@ -52,9 +52,13 @@ namespace lear_project.Logic
             return _context.FoodList.FirstOrDefault(t => t.Id == id);
         }
 
-        public void UpdateFood(string foodId)
+        public void UpdateFood(string foodId, string newName, string newDescription, string newCategoryId)
         {
-            throw new NotImplementedException();
+            _context.FoodList.FirstOrDefault(t => t.Id == foodId).Name = newName;
+            _context.FoodList.FirstOrDefault(t => t.Id == foodId).Description = newDescription;
+            _context.FoodList.FirstOrDefault(t => t.Id == foodId).CategoryId = newCategoryId;
+            _context.SaveChanges();
+
         }
     }
 }

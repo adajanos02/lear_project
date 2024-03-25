@@ -1,0 +1,26 @@
+﻿@using lear_project.Models
+@model Food
+
+<h1>Create your Food</h1>
+
+<form asp-controller="Food" asp-action="AddFood" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column">
+    @Html.LabelFor(t => t.Name)
+    @Html.EditorFor(t => t.Name)
+    @Html.ValidationMessageFor(t => t.Name)
+
+    @Html.LabelFor(t => t.Description)
+    @Html.EditorFor(t => t.Description)
+    @Html.ValidationMessageFor(t => t.Description)
+
+    @Html.LabelFor(t => t.CategoryId)
+    @Html.EditorFor(t => t.CategoryId)
+    @Html.ValidationMessageFor(t => t.CategoryId)
+
+    <input type="hidden" name="imagefilename" value="asd" />
+    <input type="hidden" name="contenttype" value="asd" />
+    <label>Picture</label>
+    <input type="file" name="picturedata" />
+
+    <input type="submit" class="btn btn-primary" value="Create" />
+
+</form>

@@ -3,7 +3,7 @@
 
 <h1>Food List</h1>
 
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Name</th>
@@ -24,7 +24,7 @@
                     <form asp-controller="Cart" asp-action="AddToCart" method="post">
                         <input type="hidden" name="foodId" value="@foodItem.Id" />
                         <input type="hidden" name="quantity" id="quantity_@foodItem.Id" value="1" />
-                        <button type="submit">Add to Cart</button>
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 </td>
                 

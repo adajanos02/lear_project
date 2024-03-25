@@ -1,0 +1,18 @@
+﻿<!-- Cart/CreateOrder.cshtml -->
+@model Order
+
+<h2>Megrendelés adatai</h2>
+
+<form id="orderForm">
+    <div>
+        <label for="name">Név:</label>
+        <input type="text" id="name" name="name" required />
+    </div>
+    <div>
+        <label for="address">Lakcím:</label>
+        <input type="text" id="address" name="address" required />
+    </div>
+    <div>
+        <button type="submit">Véglegesítés</button>
+    </div>
+</form>

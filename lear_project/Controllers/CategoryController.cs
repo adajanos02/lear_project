@@ -25,6 +25,11 @@ namespace lear_project.Controllers
             return View(categories);
         }
 
+        public IActionResult AddCategory()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCategory(Category category)
         {

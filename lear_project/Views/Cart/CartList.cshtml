@@ -2,7 +2,7 @@
 
 <h1>Shopping Cart</h1>
 
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Name</th>
@@ -17,7 +17,27 @@
                 <td>@item.First().Name</td>
                 <td>@item.First().Description</td>
                 <td>@Model.Count(x => x.Id == item.First().Id)</td>
+                <td>
+                    <form asp-controller="Cart" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@item.First().Id" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+<h2>Megrendelés</h2>
+<form asp-controller="Cart" asp-action="PlaceOrder" method="post">
+    <div>
+        <label for="name">Név:</label>
+        <input type="text" id="name" name="name" required />
+    </div>
+    <div>
+        <label for="address">Lakcím:</label>
+        <input type="text" id="address" name="address" required />
+    </div>
+    <div>
+        <button type="submit">Megrendelés</button>
+    </div>
+</form>

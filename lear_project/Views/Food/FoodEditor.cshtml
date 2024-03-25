@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Food>
+
+<h1>Food List</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var foodItem in Model)
+        {
+            <tr>
+                <td>@foodItem.Name</td>
+                <td>@foodItem.Description</td>
+                <td>
+                    <form asp-controller="Food" asp-action="DeleteFood" method="post">
+                        <input type="hidden" name="id" value="@foodItem.Id" />
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Food" asp-action="UpdateFood" method="get">
+                        <input type="hidden" name="id" value="@foodItem.Id" />
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="button" asp-controller="Food" asp-action="AddFood">Add Food</a>
+
