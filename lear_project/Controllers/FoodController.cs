@@ -2,6 +2,7 @@
 using lear_project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using System.Diagnostics;
 
 namespace lear_project.Controllers
@@ -22,22 +23,31 @@ namespace lear_project.Controllers
 
         public IActionResult FoodList()
         {
-            
             return View(_foodLogic.GetFoods());
         }
+
         public IActionResult FoodEditor()
         {
             return View(_foodLogic.GetFoods());
-
         }
+
         public IActionResult AddFood()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFood(Food food)
+        public async Task<IActionResult> AddFood(Food food, IFormFile picturedata)
         {
+            using (var stream = picturedata.OpenReadStream())
+            {
+                byte[] buffer = new byte[picturedata.Length];
+                stream.Read(buffer, 0, (int)picturedata.Length);
+                //db módszer
+                food.Data = buffer;
+                food.ContentType = picturedata.ContentType;
+            }
+
             _foodLogic.AddFood(food);
             return RedirectToAction(nameof(FoodList));
         }
@@ -63,34 +73,18 @@ namespace lear_project.Controllers
             return View(food);
         }
 
-        // POST: Food/Edit/5
         [HttpPost]
         public async Task<IActionResult> UpdateFood(string oldFoodId, string newName, string newDescription, string newCategoryId)
         {
-            
             _foodLogic.UpdateFood(oldFoodId, newName, newDescription, newCategoryId);
-
             return RedirectToAction(nameof(FoodEditor));
         }
-
-       
-
-        //public IActionResult UpdateFood(string id)
-        //{
-
-        //    return View(id);
-        //}
-        //[HttpPost]
-        //public IActionResult UpdateFood(Food food, string id)
-        //{
-        //    _foodLogic.UpdateFood(id, food);
-        //    return RedirectToAction(nameof(FoodEditor));
-        //}
 
         public IActionResult Privacy()
         {
             return View();
         }
+
         public IActionResult SelectedCategory(string selectedCategory)
         {
             var foodItems = _foodLogic.GetFoods().Where(f => f.CategoryId == selectedCategory).ToList();
@@ -102,6 +96,35 @@ namespace lear_project.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult GetImage(string id)
+        {
+            var food = _foodLogic.ReadFromId(id);
+            if (food.ContentType.Length > 3)
+            {
+                return new FileContentResult(food.Data, food.ContentType);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string password)
+        {
+            if (password == "jelszo")
+            {
+                return RedirectToAction(nameof(FoodEditor));
+            }
+            else
+                return View();
         }
     }
     

@@ -11,6 +11,5 @@ namespace lear_project.Logic
         void UpdateFood(string foodId, string newName, string newDescription, string newCategoryId);
         Food? ReadFromId(string id);
         Food? Read(string name);
-
     }
 }

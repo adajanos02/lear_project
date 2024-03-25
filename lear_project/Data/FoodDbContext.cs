@@ -13,10 +13,5 @@ namespace lear_project.Data
         {
             
         }
-
-
-       
-
-       
     }
 }

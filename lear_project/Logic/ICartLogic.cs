@@ -7,6 +7,5 @@ namespace lear_project.Logic
         void AddToCart(Food fooditem);
         void RemoveFromCart(Food fooditem);
         IEnumerable<Food> GetCartItems();
-        //void ClearCart();
     }
 }

@@ -20,7 +20,7 @@
                 <td>
                     <form asp-controller="Cart" asp-action="Delete" method="post">
                         <input type="hidden" name="id" value="@item.First().Id" />
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -34,10 +34,10 @@
         <input type="text" id="name" name="name" required />
     </div>
     <div>
-        <label for="address">Lakcím:</label>
+        <label for="address">Cím:</label>
         <input type="text" id="address" name="address" required />
     </div>
     <div>
-        <button type="submit">Megrendelés</button>
+        <button type="submit" class="btn btn-primary">Megrendelés</button>
     </div>
 </form>

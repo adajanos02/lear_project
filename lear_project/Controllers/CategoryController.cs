@@ -62,8 +62,6 @@ namespace lear_project.Controllers
 
         public IActionResult OtherPage(int categoryId)
         {
-            // Itt megjeleníthető egy másik nézet a kiválasztott kategória alapján
-
             return View(categoryId);
         }
     }

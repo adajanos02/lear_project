@@ -16,23 +16,23 @@ namespace lear_project.Controllers
             _cartLogic = cartLogic;
             this.foodDbContext = foodDbContext;
         }
+
         public IActionResult AddToCart(string foodId, int quantity)
         {
             var foodItem = _foodLogic.ReadFromId(foodId);
 
-            // Darabszám ellenőrzése
             if (quantity < 1)
             {
                 return BadRequest("Invalid quantity.");
             }
 
-            // Kosárba helyezés
             for (int i = 0; i < quantity; i++)
             {
                 _cartLogic.AddToCart(foodItem);
             }
             return View("CartList", _cartLogic.GetCartItems().ToList());
         }
+
         public IActionResult Delete(string id)
         {
             var todelete = _cartLogic.GetCartItems().Where(t => t.Id == id);
@@ -42,49 +42,33 @@ namespace lear_project.Controllers
             }
 
             return View("CartList", _cartLogic.GetCartItems().ToList());
-
         }
-        //public IActionResult DeleteCartItem(string id) 
-        //{
-
-        //}
 
         public IActionResult CartList()
         {
-            
             return View(_cartLogic.GetCartItems());
         }
 
         [HttpPost]
         public IActionResult PlaceOrder(string name, string address)
         {
-            // Model érvényességének ellenőrzése
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(address))
             {
                 return BadRequest("Név és lakcím megadása kötelező!");
             }
-            // Order objektum létrehozása és hozzáadása az adatbázishoz
+            
             var order = new Order
                 {
                     Name = name,
-                    Address = address,
-                   // Foods = CartLogic._CartList
-
-
-                    // Kosár tartalmának beállítása (amit a Cart-ból fogsz kapni)
-                    // Ezt a megfelelő adatbázisból kell lekérni, ahonnan a kosár tartalma származik
-                    // Pl. order.FoodItems = _cartService.GetItems();
+                    Address = address
                 };
 
-                // Az Order objektum mentése
                 foodDbContext.OrderList.Add(order);
                 foodDbContext.SaveChanges();
 
-                // Sikeres válasz küldése
                 return RedirectToAction("OrderPlaced");
-            
-            
         }
+
         public IActionResult OrderPlaced()
         {
             return View(_cartLogic.GetCartItems());

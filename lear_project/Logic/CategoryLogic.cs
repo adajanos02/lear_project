@@ -10,6 +10,7 @@ namespace lear_project.Logic
         {
             _context = context;
         }
+
         public void AddCategory(Category category)
         {
             var old = _context.CategoryList.FirstOrDefault(t => t.Id == category.Id);

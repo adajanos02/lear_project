@@ -5,7 +5,6 @@ namespace lear_project.Logic
 {
     public class FoodLogic : IFoodLogic
     {
-
         private readonly FoodDbContext _context;
 
         public FoodLogic(FoodDbContext context)
@@ -58,7 +57,6 @@ namespace lear_project.Logic
             _context.FoodList.FirstOrDefault(t => t.Id == foodId).Description = newDescription;
             _context.FoodList.FirstOrDefault(t => t.Id == foodId).CategoryId = newCategoryId;
             _context.SaveChanges();
-
         }
     }
 }

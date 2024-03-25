@@ -5,10 +5,7 @@ namespace lear_project.Logic
 {
     public class CartLogic : ICartLogic
     {
-        
         public static List<Food> _CartList = new List<Food>();
-
-       
 
         public void AddToCart(Food foodItem)
         {
@@ -20,16 +17,9 @@ namespace lear_project.Logic
             _CartList.Remove(foodItem);
         }
 
-        //public void ClearCart()
-        //{
-        //    _context.CartList.
-        //}
-
         public IEnumerable<Food> GetCartItems()
         {
             return _CartList.ToList();
         }
-
-       
     }
 }

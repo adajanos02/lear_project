@@ -1,20 +1,21 @@
-﻿<!-- Food/FoodList.cshtml -->
-@model IEnumerable<Food>
+﻿@model IEnumerable<Food>
 
 <h1>Food List</h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
+            <th></th>
             <th>Name</th>
-            <th>Category</th>
-            <th>Action</th> 
+            <th>Description</th>
+            <th>Quantity</th> 
         </tr>
     </thead>
     <tbody>
         @foreach (var foodItem in Model)
         {
             <tr>
+                <td><img height="200" width="200" src="@Url.Action("GetImage", "Food", new {id = foodItem.Id})" /></td>
                 <td>@foodItem.Name</td>
                 <td>@foodItem.Description</td>
                 <td>
@@ -33,9 +34,8 @@
     </tbody>
 </table>
 <script>
-    // JavaScript függvény az egyedi darabszám beállításához
     function updateQuantity(input) {
-        var foodId = input.name.split('_')[1]; // Az étel azonosítójának meghatározása
+        var foodId = input.name.split('_')[1]; 
         var quantityInput = document.getElementById('quantity_' + foodId);
         quantityInput.value = input.value;
     }

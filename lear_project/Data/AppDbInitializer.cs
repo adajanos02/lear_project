@@ -1,5 +1,9 @@
 ﻿using lear_project.Models;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace lear_project.Data
 {
@@ -21,18 +25,27 @@ namespace lear_project.Data
                         {
                             Name = "Hamburger",
                             Description = "Juicy burger with cheese and bacon",
-                            ContentType = "Valami",
-                            CategoryId = "Foetel"
+                            ContentType = "image/jpeg",
+                            CategoryId = "Eloetel",
+                            Data = GetImageBytes("hamburger.jpg")
                         },
 
                         new Food()
                         {
                             Name = "Pizza",
                             Description = "Delicious pizza with various toppings",
-                            ContentType = "valami",
-                            CategoryId = "Desszert"
+                            ContentType = "image/jpeg",
+                            CategoryId = "Foetel",
+                            Data = GetImageBytes("pizza.jpg") 
                         },
-
+                        new Food()
+                        {
+                            Name = "Somloi galuska",
+                            Description = "Habos, csokis, mazsolás édesség",
+                            ContentType = "image/jpeg",
+                            CategoryId = "Desszert",
+                            Data = GetImageBytes("somloi.jpg") 
+                        }
                     });
                     context.SaveChanges();
                 }
@@ -54,14 +67,17 @@ namespace lear_project.Data
                         new Category()
                         {
                             Name = "Desszert"
-                        },
-
-                        
-
+                        }
                     });
                     context.SaveChanges();
                 }
             }
+        }
+
+        private static byte[] GetImageBytes(string imageName)
+        {
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", imageName);
+            return File.ReadAllBytes(imagePath);
         }
     }
 }
